@@ -48,7 +48,8 @@ class PCAClassifier:
         best_label = None
 
         for label in self.possible_labels:
-            distance = np.linalg.norm(self.labels_centroid[label] - Z_k_data)
+            assert self.labels_centroid[label].shape == Z_k_data.shape
+            distance = np.linalg.norm(self.labels_centroid[label] - Z_k_data, 2)
             if distance < best_distance:
                 best_distance = distance
                 best_label = label
