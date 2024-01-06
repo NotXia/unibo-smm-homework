@@ -60,10 +60,11 @@ def sgd(loss, grad_loss, w0, data, batch_size, n_epochs, lr, random_seed=42):
     history_loss = [loss(w0, X, y)]
     history_grad = [grad_loss(w0, X, y)]
     history_err = [np.linalg.norm(history_grad[-1], 2)]
-
+    rng = np.random.default_rng(random_seed)
+    
     for _ in range(n_epochs):
         idxs = np.arange(0, data_size)
-        np.random.default_rng(random_seed).shuffle(idxs)
+        rng.shuffle(idxs)
 
         for i in range(math.ceil(data_size / batch_size)):
             batch_idxs = idxs[i*batch_size : (i+1)*batch_size]
